@@ -6,9 +6,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 // nasz plik definiujący odpowiedzi dla ścieżek
-const routes = require('./routes/index');
+const routes = require('./routes');
 
 const app = express();
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // konfiguracja parserów
 app.use(bodyParser.json());
