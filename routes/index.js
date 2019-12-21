@@ -3,15 +3,15 @@
 const express = require('express');
 const router = express.Router();
 const IndexController = require('../controllers/IndexController');
-const ProductsContorller = require('../controllers/ProductsController');
+const ProductContorller = require('../controllers/ProductController');
 
 // zdefiniowanie odpowiedzi dla "strony głównej"
 router.get('/', IndexController.home);
 
 // zdefiniowie odpowiedzi dla produktów
-router.get('/products', ProductsContorller.getAll);
-router.get('/products/:id', ProductsContorller.getById);
-router.post('/products', ProductsContorller.store);
-router.put('/products/:id', ProductsContorller.updateById);
+router.get('/products', ProductContorller.getAll);
+router.get('/products/:id', ProductContorller.getById);
+router.post('/products', ProductContorller.store);
+router.put('/products', ProductContorller.updateById);
 
 module.exports = router;
