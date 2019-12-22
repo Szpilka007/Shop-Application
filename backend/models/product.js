@@ -2,7 +2,7 @@
 const bookshelf= require('../config/bookshelf');
 
 const Product = bookshelf.Model.extend({
-    tableName: 'products'
+    tableName: 'Products'
 })
 
 module.exports.getAll = () => {
