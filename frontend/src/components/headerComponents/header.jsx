@@ -9,7 +9,7 @@ class Header extends React.Component {
             <header>
 
                 <div className='logo'>
-                   Shop
+                    <i>Shop</i>
                 </div>
 
                 <nav>
