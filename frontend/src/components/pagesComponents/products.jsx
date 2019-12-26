@@ -1,5 +1,5 @@
 import React from 'react';
-
+import  addProduct  from './basket'
 
 class Products extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class Products extends React.Component {
             )
         }
         return (
-            <div>
+            <div id='products'>
                 <h1>Products </h1>
                 <div id='products-table'>
                     <table>
@@ -50,7 +50,7 @@ class Products extends React.Component {
     }
 
     addToBasket(product) {
-        console.log(product)
+        addProduct(product)
     }
 }
 

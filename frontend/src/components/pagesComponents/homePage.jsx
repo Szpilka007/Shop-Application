@@ -4,7 +4,7 @@ class HomePage extends React.Component {
 
     render(){
         return (
-            <div className="contailer-fluid">
+            <div id='home-page'>
 
                 <h1>Home page component </h1>
 
