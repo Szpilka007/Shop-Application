@@ -9,6 +9,7 @@
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-mdl": "^1.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "reactable": "^1.1.0"

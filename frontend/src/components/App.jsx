@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router,
     Route
 } from 'react-router-dom';
+
 // components
 import Header from './headerComponents/header';
 import Footer from './footerComponent/footer';

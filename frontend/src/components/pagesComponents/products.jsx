@@ -1,5 +1,5 @@
 import React from 'react';
-import  addProduct  from './basket'
+import '../../css/pages.css'
 
 class Products extends React.Component {
     constructor(props) {
@@ -16,14 +16,7 @@ class Products extends React.Component {
                     <td>{product.description}</td>
                     <td>{product.price} </td>
                     <td><input id={`amount-Id-${product.id}`} type='number' placeholder='Amount of products'/></td>
-                    <td><input type='button' value='Add to Basket'
-                               onClick={() => {
-                                   this.addToBasket(
-                                       {
-                                           amount: document.getElementById(`amount-Id-${product.id}`).value,
-                                           product: product
-                                       })
-                               }}/></td>
+                    <td><input type='button' value='Add to Basket'/></td>
                 </tr>
             )
         }
@@ -49,9 +42,6 @@ class Products extends React.Component {
             .then(products => this.setState({products: products})).then(() => true)
     }
 
-    addToBasket(product) {
-        addProduct(product)
-    }
 }
 
 export default Products;

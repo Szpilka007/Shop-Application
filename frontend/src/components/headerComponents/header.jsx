@@ -25,6 +25,7 @@ class Header extends React.Component {
                         </li>
                     </ul>
                 </nav>
+
             </header>
         );
     }
