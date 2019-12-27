@@ -19,6 +19,18 @@ class Basket extends React.Component {
 
 
     render() {
+        const items = [];
+        for (const product of this.state.listProducts) {
+            items.push(
+                <tr className='products-table-row'>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price} </td>
+                    <td>{product.amount}</td>
+                    <td><input type='button' value='Remove'/></td>
+                </tr>
+            )
+        }
         return (
             <div id='basket'>
                 <h1>Basket </h1>
@@ -34,7 +46,18 @@ class Basket extends React.Component {
                 </section>
                 <section class="section" id='not-empty-basket'>
 
-                    <div>TABELA Z PRODUKTAMI</div>
+                    <h1>Your Order</h1>
+
+                    <div id='table-with-ordered-products'>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                            {items}
+                        </table>
+                    </div>
                     <input type='button' onClick={() => {
                         this.hideSection();
                         this.showSection('form-to-fill')
