@@ -9,7 +9,7 @@ class Basket extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            listProducts: [],
+            basket: JSON.parse(sessionStorage.getItem('basket')),
             currentElement: null,
             firstName: null,
             email: null,
@@ -18,53 +18,93 @@ class Basket extends React.Component {
     }
 
 
-    render() {
-        const items = [];
-        for (const product of this.state.listProducts) {
-            items.push(
-                <tr className='products-table-row'>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td>{product.price} </td>
-                    <td>{product.amount}</td>
-                    <td><input type='button' value='Remove'/></td>
-                </tr>
-            )
+    onIncrease(item){
+        let basket = JSON.parse(sessionStorage.getItem('basket'));
+        for(let prop in basket)
+        {
+            if (basket[prop].product.id === item.product.id)
+            {
+                basket[prop].amount += 1;
+                break;
+            }
         }
+        sessionStorage.setItem('basket', JSON.stringify(basket));
+        this.setState({
+            basket: basket
+        })
+    }
+
+    onDecrease(item) {
+        let basket = JSON.parse(sessionStorage.getItem('basket'));
+        let index = null;
+        for (let prop in basket)
+        {
+            if (basket[prop].product.id === item.product.id)
+            {
+                basket[prop].amount -= 1;
+                if (basket[prop].amount === 0)
+                {
+                    index = prop;
+                }
+                break;
+            }
+        }
+        if(index != null) basket.splice(index, 1);
+        sessionStorage.setItem('basket', JSON.stringify(basket));
+        this.setState({
+            basket: basket
+        })
+    }
+
+    render() {
+        const items = [this.state.basket.map((item, i) =>
+                <tr className='products-table-row' key={i}>
+                    <td>{item.product.name}</td>
+                    <td>{item.product.description}</td>
+                    <td>{item.product.price} </td>
+                    <td>{item.amount}</td>
+                    <td><input onClick={() => this.onDecrease(item)} type='button' value='-'/></td>
+                    <td><input onClick={() => this.onIncrease(item)} type='button' value='+'/></td>
+                </tr>
+            )];
+
         return (
             <div id='basket'>
                 <h1>Basket </h1>
-                <section class="section" id='empty-basket-section'>
+                <section className="section" id='empty-basket-section'>
 
                     <h1>Your Basket is Empty!</h1>
-                    <input type='button' onClick={() => {
-                        this.hideSection();
-                        this.showSection('not-empty-basket')
-                    }
-                    }/>
+                        <input value='Fill from' type='button' onClick={() => {
+                            this.hideSection();
+                            this.showSection('not-empty-basket')
+                        }
+                        }/>
 
                 </section>
-                <section class="section" id='not-empty-basket'>
-
+                <section className="section" id='not-empty-basket'>
                     <h1>Your Order</h1>
-
-                    <div id='table-with-ordered-products'>
-                        <table>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                            </tr>
-                            {items}
-                        </table>
-                    </div>
-                    <input type='button' onClick={() => {
+                        <div id='table-with-ordered-products'>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {items}
+                                </tbody>
+                            </table>
+                        </div>
+                    <input value='Fill from' type='button' onClick={() => {
                         this.hideSection();
                         this.showSection('form-to-fill')
                     }}/>
 
                 </section>
-                <section class="section" id='form-to-fill'>
+                <section className="section" id='form-to-fill'>
 
                     <form>
                         First name:<br/>
@@ -112,8 +152,6 @@ class Basket extends React.Component {
         this.currentElement = null;
 
     }
-
-
 }
 
 export default Basket;
