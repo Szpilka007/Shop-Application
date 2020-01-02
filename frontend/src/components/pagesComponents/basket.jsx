@@ -124,7 +124,7 @@ class Basket extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.listProducts.length > 0)
+        if (this.state.basket.length > 0)
             this.showSection('not-empty-basket');
         else
             this.showSection('empty-basket-section')
