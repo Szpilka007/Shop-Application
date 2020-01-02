@@ -6,11 +6,6 @@ class Products extends React.Component {
         this.state = {
             products: []
         };
-        this.amountInput = React.createRef();
-        this.item = {
-            product: null,
-            amount: null
-        };
         this.basket = [];
     }
 
@@ -18,16 +13,7 @@ class Products extends React.Component {
     onAddToBasket(product1) {
         let basket = Object.values(JSON.parse(sessionStorage.getItem('basket')));
         let exist = false;
-        //let newData = oldData.concat(product);
         console.log(basket.length);
-        // if(basket.length === 0) {
-        //     let item = {
-        //     product: product1,
-        //     amount: 1
-        // }
-        //     basket.push(item)
-        // }
-        // else {
             for(let item in basket){
                 console.log(basket[item]);
             }
