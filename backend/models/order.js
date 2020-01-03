@@ -2,25 +2,25 @@
 const bookshelf= require('../config/bookshelf');
 
 const Order = bookshelf.Model.extend({
-    tableName: 'Order'
-})
+    tableName: 'order'
+});
 
 module.exports.getAll = () => {
     return Order.fetchAll();
-}
+};
 
 module.exports.getById = (id) => {
     return new Order({'id':id}).fetch();
-}
+};
 
 module.exports.create = (order) => {
     return new Order({
-        acceptdate: order.acceptdate,
-        orderstatus: order.orderstatus,
-        username: order.username,
+        acceptDate: order.acceptDate,
+        orderStatus: order.orderStatus,
+        userName: order.userName,
         email: order.email,
-        phonenumber: order.phonenumber,
-        productlist: order.productlist
+        phoneNumber: order.phoneNumber,
+        productList: order.productList
     }).save();
 };
 
@@ -28,13 +28,13 @@ module.exports.update = (order) => {
     return new Order({
         id: order.id
     }).save( {
-            acceptdate: order.acceptdate,
-            orderstatus: order.orderstatus,
-            username: order.username,
+            acceptDate: order.acceptDate,
+            orderStatus: order.orderStatus,
+            username: order.userName,
             email: order.email,
-            phonenumber: order.phonenumber,
-            productlist: order.productlist
+            phoneNumber: order.phoneNumber,
+            productList: order.productList
         },
         {patch: true}
     );
-}
+};

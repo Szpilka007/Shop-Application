@@ -18,12 +18,12 @@ exports.getById = (req, res) => {
 
 exports.store = (req, res) => {
     const newOrder = Order.create({
-        'acceptdate': req.body.acceptdate,
-        'orderstatus': req.body.orderstatus,
-        'username': req.body.username,
+        'acceptDate': req.body.acceptDate,
+        'orderStatus': req.body.orderStatus,
+        'userName': req.body.userName,
         'email': req.body.email,
-        'phonenumber': req.body.phonenumber,
-        'productlist': req.body.productlist
+        'phoneNumber': req.body.phoneNumber,
+        'productList': JSON.stringify(req.body.productList)
     }).then(function() {
         res.json({
             'status':'saved!',

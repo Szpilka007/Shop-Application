@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/pages.css'
-
+import axios from 'axios'
 
 const {$id} = require('../../utils/idUtils');
 
@@ -9,14 +9,23 @@ class Basket extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            basket: JSON.parse(sessionStorage.getItem('basket')),
-            currentElement: null,
-            firstName: null,
-            email: null,
-            phoneNumber: null
-        }
+                acceptDate: null,
+                orderStatus: null,
+                userName: null,
+                email: null,
+                phoneNumber: null,
+                productList: JSON.parse(sessionStorage.getItem('basket'))
+        };
     }
 
+    calculateValue() {
+        let sum = 0;
+        for(let item in this.state.productList)
+        {
+            sum += (this.state.productList[item].product.price * this.state.productList[item].amount);
+        }
+        return sum;
+    }
 
     onIncrease(item){
         let basket = JSON.parse(sessionStorage.getItem('basket'));
@@ -30,7 +39,7 @@ class Basket extends React.Component {
         }
         sessionStorage.setItem('basket', JSON.stringify(basket));
         this.setState({
-            basket: basket
+            productList: basket
         })
     }
 
@@ -52,12 +61,37 @@ class Basket extends React.Component {
         if(index != null) basket.splice(index, 1);
         sessionStorage.setItem('basket', JSON.stringify(basket));
         this.setState({
-            basket: basket
+            productList: basket
         })
     }
 
+    inputChangeHandler = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    submitHandler = (event) => {
+        event.preventDefault();
+        let tempDate = new Date();
+        let date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
+        console.log(date);
+        this.setState({
+            acceptDate: date,
+            orderStatus: 'Not approved'
+        }, function ()
+            {
+                console.log(this.state);
+                axios.post('http://localhost:8080/orders', this.state)
+            });
+
+    };
+
+    validateInput() {
+
+    }
     render() {
-        const items = [this.state.basket.map((item, i) =>
+        const items = [this.state.productList.map((item, i) =>
                 <tr className='products-table-row' key={i}>
                     <td>{item.product.name}</td>
                     <td>{item.product.description}</td>
@@ -97,34 +131,39 @@ class Basket extends React.Component {
                                     {items}
                                 </tbody>
                             </table>
+                        <hr/>
+                            <p>Lacznie: {this.calculateValue()} zł.</p>
+
+                            <input value='Accept order' type='button' onClick={() => {
+                                this.hideSection();
+                                this.showSection('form-to-fill')
+                            }}/>
                         </div>
-                    <input value='Fill from' type='button' onClick={() => {
-                        this.hideSection();
-                        this.showSection('form-to-fill')
-                    }}/>
+
 
                 </section>
-                <section className="section" id='form-to-fill'>
+                <section className="section" id='form-to-fill' >
 
-                    <form>
+                    <form onSubmit={this.submitHandler}>
                         First name:<br/>
-                        <input type="text" name="firstname"/>
+                        <input type="text" name="userName" onChange={this.inputChangeHandler}/>
                         <br/>
                         Email:<br/>
-                        <input type="text" name="firstname"/>
+                        <input type="text" name="email" onChange={this.inputChangeHandler}/>
                         <br/>
                         Phone Number<br/>
-                        <input type="text" name="firstname"/>
-
+                        <input type="text" name="phoneNumber" onChange={this.inputChangeHandler}/>
+                        <button type='submit'>Send order</button>
                     </form>
-                    <input type='button' value='Send Order' />
+
                 </section>
             </div>
         );
     }
 
     componentDidMount() {
-        if (this.state.basket.length > 0)
+
+        if (this.state.productList.length > 0)
             this.showSection('not-empty-basket');
         else
             this.showSection('empty-basket-section')

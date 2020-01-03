@@ -9,7 +9,6 @@ class Products extends React.Component {
         this.basket = [];
     }
 
-
     onAddToBasket(product1) {
         let basket = Object.values(JSON.parse(sessionStorage.getItem('basket')));
         let exist = false;
@@ -68,6 +67,7 @@ class Products extends React.Component {
     }
 
     componentDidMount() {
+        if(sessionStorage.getItem('basket') === null) {sessionStorage.setItem('basket', JSON.stringify([]))};
         return fetch('http://localhost:8080/products').then(resp => Promise.resolve(resp.json()))
             .then(products => this.setState({products: products})).then(() => true)
     }

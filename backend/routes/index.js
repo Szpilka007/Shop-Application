@@ -27,8 +27,8 @@ router.get('/status', OrderStatusController.getAll);
 
 // zdefiniowanie odpowiedzi dla zamówień
 router.get('/orders',OrderController.getAll);
-router.get('orders/:id', ProductContorller.getById);
-router.post('/orders', ProductContorller.store);
-router.put('/orders', ProductContorller.updateById);
+router.get('orders/:id', OrderController.getById);
+router.post('/orders', OrderController.store);
+router.put('/orders', OrderController.updateById);
 
 module.exports = router;

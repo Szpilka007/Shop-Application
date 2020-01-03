@@ -30,7 +30,9 @@ class App extends React.Component {
         );
     }
 
-
+    componentDidMount() {
+        if(sessionStorage.getItem('basket') === null) {sessionStorage.setItem('basket', JSON.stringify([]))};
+    }
 }
 
 export default App;
