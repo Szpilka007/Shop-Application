@@ -22,7 +22,7 @@ class App extends React.Component {
 
                     <Route exact path='/' component={HomePage} />
                     <Route exact path='/products' component={Products} />
-                    <Route exact path='/basket' component={Basket} />
+                    <Route exact path='/basket' component={Basket}/>
 
                     <Footer/>
                 </div>
@@ -30,7 +30,9 @@ class App extends React.Component {
         );
     }
 
-
+    componentDidMount() {
+        if(sessionStorage.getItem('basket') === null) {sessionStorage.setItem('basket', JSON.stringify([]))};
+    }
 }
 
 export default App;
