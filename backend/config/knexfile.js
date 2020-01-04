@@ -3,7 +3,7 @@ module.exports = {
     client: 'mysql',
     connection: {
         user: 'root',
-        password: 'YES', // twoje haslo
+        password: 'Adammaxmax1!', // twoje haslo
         database: 'products',  // nazwa bazy danych
     }
 }
