@@ -10,7 +10,8 @@ class Products extends React.Component {
             products: [],
             filteredProducts: [],
             categories: [],
-            actualCategory: ""
+            actualCategory: "",
+            amounts: []
         };
     }
 
@@ -58,8 +59,8 @@ class Products extends React.Component {
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.price} </td>
-                <td><input id={`amount-Id-${product.id}`} type='number' placeholder='Amount of products'/></td>
-                <td><input class="btn btn-secondary " onClick={() => this.onAddToBasket(product)} type='button'
+                <td><input defaultValue={1} min={1} id={`amount-Id-${product.id}`} type='number' placeholder='Amount of products' /></td>
+                <td><input className="btn btn-secondary " onClick={() => this.onAddToBasket(product)} type='button'
                            value='Add to Basket'/></td>
             </tr>
         )];
@@ -73,8 +74,8 @@ class Products extends React.Component {
                 <h1 id='products-title'>Products </h1>
                 <form>
                     <div>
-                        <h3 id='filter'>Filt by category</h3>
-                        <select id='select-category' class="form-control" name="actualCategory"
+                        <h3 id='filter'>Filtr by category</h3>
+                        <select id='select-category' className="form-control" name="actualCategory"
                                 onChange={this.changeHandler}>
                             <option value="">Any</option>
                             {categories}
@@ -82,7 +83,7 @@ class Products extends React.Component {
                     </div>
                 </form>
                 <div id='products-table'>
-                    <table class="table table-striped table-hover">
+                    <table className="table table-striped table-hover">
                         <thead id='table-head'>
                         <tr>
                             <th>Name</th>
@@ -110,6 +111,7 @@ class Products extends React.Component {
             .then(categories => this.setState({categories: categories})).then(() => true);
         fetch('http://localhost:8080/products').then(resp => Promise.resolve(resp.json()))
             .then(products => this.setState({products: products, filteredProducts: products})).then(() => true)
+
     }
 }
 

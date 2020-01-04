@@ -76,7 +76,8 @@ class Basket extends React.Component {
         sessionStorage.setItem('basket', JSON.stringify(basket));
         this.setState({
             productList: basket
-        })
+        });
+
     }
 
     inputChangeHandler = (event) => {
@@ -139,7 +140,7 @@ class Basket extends React.Component {
                         <h3 id='order-title'>Your Order</h3>
                     </div>
                     <div id='table-with-ordered-products'>
-                        <table class="table table-striped  table-hover">
+                        <table className="table table-striped  table-hover">
                             <thead id='head-table-with-products'>
                             <tr>
                                 <th>Name</th>
@@ -157,7 +158,7 @@ class Basket extends React.Component {
                         <hr/>
                         <p>Lacznie: {this.calculateValue()} zł.</p>
 
-                        <input class="btn btn-secondary" value='Accept order' type='button' onClick={() => {
+                        <input className="btn btn-secondary" value='Accept order' type='button' onClick={() => {
                             this.hideSection();
                             this.showSection('form-to-fill')
                         }}/>
@@ -167,12 +168,12 @@ class Basket extends React.Component {
                 </section>
 
                 <section className="section" id='form-to-fill'>
-                    <div id='form-additional-information' class='container'>
+                    <div id='form-additional-information' className='container'>
                         <h2 id='form-title'>Additional information</h2>
-                        <form class="form-group" onSubmit={this.submitHandler} class="was-validated">
+                        <form className="form-group" onSubmit={this.submitHandler} className="was-validated">
                             <div>
                                 <label htmlFor="uname">First Name:</label>
-                                <input id="firstName" type="text" class="form-control" name="userName" placeholder="Enter first name"
+                                <input id="firstName" type="text" className="form-control" name="userName" placeholder="Enter first name"
                                        onChange={this.inputChangeHandler} required/>
                                     <div className="valid-feedback">Valid</div>
                                     <div className="invalid-feedback">Please fill out this field.</div>
@@ -193,7 +194,7 @@ class Basket extends React.Component {
                                 <div className="valid-feedback">Valid</div>
                                 <div className="invalid-feedback">Please fill out this field.</div>
                             </div>
-                            <button id='send-order-button' class="btn btn-secondary" type='submit'>Send order</button>
+                            <button id='send-order-button' className="btn btn-secondary" type='submit'>Send order</button>
                         </form>
                     </div>
                 </section>
@@ -211,7 +212,6 @@ class Basket extends React.Component {
         else
             this.showSection('empty-basket-section')
     }
-
 
     showSection(name) {
         const newElement = $id(name);

@@ -2,6 +2,7 @@
 #products, #basket, #home-page {
     width: 60%;
     padding-left: 20%;
+    margin-bottom: 100px;
 }
 
 ListItem {
