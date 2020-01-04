@@ -32,19 +32,25 @@ class Basket extends React.Component {
         })
     }
 
+    round(n, k)
+    {
+        let factor = Math.pow(10, k);
+        return Math.round(n*factor)/factor;
+    }
+
     calculateValue() {
         let sum = 0;
         for (let item in this.state.productList) {
             sum += (this.state.productList[item].product.price * this.state.productList[item].amount);
         }
-        return sum;
+        return this.round(sum,2);
     }
 
     onIncrease(item) {
         let basket = JSON.parse(sessionStorage.getItem('basket'));
         for (let prop in basket) {
             if (basket[prop].product.id === item.product.id) {
-                basket[prop].amount += 1;
+                basket[prop].amount = parseInt(basket[prop].amount) + 1;
                 break;
             }
         }
@@ -59,7 +65,7 @@ class Basket extends React.Component {
         let index = null;
         for (let prop in basket) {
             if (basket[prop].product.id === item.product.id) {
-                basket[prop].amount -= 1;
+                basket[prop].amount = parseInt(basket[prop].amount) -1;
                 if (basket[prop].amount === 0) {
                     index = prop;
                 }
@@ -161,7 +167,7 @@ class Basket extends React.Component {
                 </section>
 
                 <section className="section" id='form-to-fill'>
-                    <div id='form-additional-information'class='container'>
+                    <div id='form-additional-information' class='container'>
                         <h2 id='form-title'>Additional information</h2>
                         <form class="form-group" onSubmit={this.submitHandler} class="was-validated">
                             <div>

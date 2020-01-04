@@ -26,17 +26,18 @@ class Products extends React.Component {
 
     onAddToBasket(product) {
         let basket = Object.values(JSON.parse(sessionStorage.getItem('basket')));
+        console.log(document.getElementById(`amount-Id-${product.id}`).value);
         let exist = false;
         for (let prop in basket) {
             if (basket[prop].product.id === product.id) {
-                basket[prop].amount += 1;
+                basket[prop].amount = parseInt(basket[prop].amount) + parseInt(document.getElementById(`amount-Id-${product.id}`).value);
                 exist = true;
             }
         }
         if (exist === false) {
             let item = {
                 product: product,
-                amount: 1
+                amount: document.getElementById(`amount-Id-${product.id}`).value
             };
             basket.push(item);
         }
