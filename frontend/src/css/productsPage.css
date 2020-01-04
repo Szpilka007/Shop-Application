@@ -1,0 +1,27 @@
+#products-table {
+    width: 150%;
+    text-align: center;
+}
+
+.btn-primary {
+    background: black;
+}
+
+#select-category {
+    margin-left: 5%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    width: auto;
+    display: inline-block;
+}
+
+#products-title {
+    padding-left: 50%;
+}
+
+#filter {
+    display: inline-block;
+    margin-left: 1%;
+}
+
+

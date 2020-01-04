@@ -1,0 +1,39 @@
+
+#basket-title {
+    padding-left: 50%;
+}
+
+#empty-basket-section {
+    margin-top: 10%;
+}
+
+#table-with-ordered-products {
+    width: 150%;
+    padding-top: 15%;
+    padding-left: 10%;
+    text-align: center;
+}
+
+#order-title {
+    padding-left: 200%;
+    width: 100%;
+}
+
+.form-group {
+    position: relative;
+}
+
+#form-title {
+    padding-left: 10%;
+    margin-bottom: 8%;
+    margin-top: 5%;
+}
+
+#form-additional-information {
+    padding-left: 30%;
+}
+
+#send-order-button {
+    margin-left: 35%;
+    margin-top: 10%;
+}
