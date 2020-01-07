@@ -1,0 +1,18 @@
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    padding-left: 15%;
+    margin: 3%;
+}
+h3 {
+    text-align: center;
+}
+
+#select-category {
+    width: 105%;
+    text-align: center;
+}

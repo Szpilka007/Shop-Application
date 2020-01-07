@@ -94,13 +94,12 @@ class Basket extends React.Component {
             'Stworzenie Zamówienia',
             'Czy na pewno chcesz stworzyć zamówienie z podanymi danymi?',
             () => {
+                console.log(this.state.product)
                 this.setState({
                     acceptDate: date,
                     orderStatus: 'Not approved'
                 }, function () {
-                    axios.post('http://localhost:8080/orders', this.state).then(
-
-                    )
+                    axios.post('http://localhost:8080/orders', this.state).then()
                 });
                 this.clearState();
                 this.hideSection();
