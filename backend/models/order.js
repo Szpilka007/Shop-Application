@@ -20,17 +20,15 @@ module.exports.getById = (id) => {
 module.exports.create = (order) => {
     if (order.userName.length < 1)
         throw 'Wrong user name';
-    if (!Number.isInteger(order.phoneNumber))
+    if (isNaN(order.phoneNumber))
         throw 'Uncorrected phone number';
 
     const productList = JSON.parse(order.productList);
     for (let i = 0; i < productList.length; i++) {
         if (productList[i].amount < 1)
             throw 'Uncorrected amount of products';
-        if (!Number.isInteger(productList[i].amount))
-            throw 'Amount of products must be a number';
-        if (Product({'id': productList[i].product.id}).fetch().isNull())
-            throw 'There is no product with given id in database'
+         if (isNaN(productList[i].amount))
+             throw 'Amount of products must be a number';
     }
     return new Order({
         acceptDate: order.acceptDate,

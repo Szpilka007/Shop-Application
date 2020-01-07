@@ -9,6 +9,7 @@ const OrderStatusController = require('../controllers/OrderStatusController');
 const OrderController = require('../controllers/OrderController');
 const app = require('../app');
 
+
 // zdefiniowanie odpowiedzi dla "strony głównej"
 router.get('/', IndexController.home);
 
